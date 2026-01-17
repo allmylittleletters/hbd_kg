@@ -256,6 +256,25 @@ input[type="text"] {
     color: #fff;
 }
 
+/* Timer Bar */
+.timer-bar-container {
+    width: 100%;
+    height: 20px;
+    background: #330000;
+    border: 1px solid var(--alert-color);
+    margin-top: 10px;
+    margin-bottom: 20px;
+    /* Positioned above quiz */
+}
+
+.timer-fill {
+    width: 100%;
+    height: 100%;
+    background: var(--alert-color);
+    transition: width 1s linear;
+    box-shadow: 0 0 10px var(--alert-color);
+}
+
 @keyframes shake {
     0% {
         transform: translate(1px, 1px) rotate(0deg);

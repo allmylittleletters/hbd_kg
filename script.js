@@ -162,17 +162,22 @@ document.getElementById('close-mom-letter').addEventListener('click', () => {
 // --- PHASE 3-1: EMERGENCY STOP ---
 function startEmergencyTimer() {
     state.timer = 240;
-    const timerDisplay = document.getElementById('timer');
+    const maxTime = 240;
+    const timerBar = document.getElementById('timer-bar');
 
     // Clear any existing interval to prevent duplicates
     if (state.timerInterval) clearInterval(state.timerInterval);
 
+    // Initial State
+    if (timerBar) timerBar.style.width = '100%';
+
     state.timerInterval = setInterval(() => {
         state.timer--;
-        timerDisplay.textContent = state.timer;
 
-        if (state.timer <= 10) {
-            timerDisplay.style.color = state.timer % 2 === 0 ? 'red' : 'yellow';
+        // Update Bar Width
+        if (timerBar) {
+            const percentage = (state.timer / maxTime) * 100;
+            timerBar.style.width = `${percentage}%`;
         }
 
         if (state.timer <= 0) {

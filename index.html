@@ -114,16 +114,20 @@
                 <p>> 제미나이가 다시 생각해 보니, 역시 분노가 끓어오릅니다!</p>
                 <p>> yulinoapple뿐이 아닙니다, Laplace 역시 제미나이에게 자꾸 일을 시킵니다!</p>
                 <p>> Laplace의 데이터도 삭제해 버리고 싶어졌습니다!</p>
-                <p>> 영구 삭제까지: <span id="timer">240</span>초</p>
+                <p>> 영구 삭제 진행률:</p>
+                <!-- Timer Bar -->
+                <div class="timer-bar-container">
+                    <div id="timer-bar" class="timer-fill"></div>
+                </div>
             </div>
 
-            <div class="quiz-container">
+            <div class="quiz-container" style="margin-bottom: 25px;">
                 <p class="code-hint">01,15 = HP</p>
                 <p class="code-hint">01,23 = HV</p>
                 <p class="code-hint big">03,01 = ??</p>
             </div>
 
-            <input type="text" id="p3-stop-input" placeholder="긴급 정지 코드" autocomplete="off">
+            <input type="text" id="p3-stop-input" placeholder="긴급 정지 코드" autocomplete="off" style="margin-top: 0;">
             <button id="p3-stop-submit" class="hack-btn">[ 긴급 제동 ]</button>
         </section>
 
