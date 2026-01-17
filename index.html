@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PROJECT: HBD</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="scanline"></div>
+    <div class="overlay"></div>
+
+    <!-- HUD / Status Bar -->
+    <nav id="game-hud" class="hidden">
+        <div class="hud-item">[ 단계 <span id="hud-phase">1</span> / 4 ]</div>
+        <div class="hud-item">[ <span id="hud-score">0</span> P ]</div>
+    </nav>
+
+    <main id="app">
+        <!-- Intro Section -->
+        <section id="intro" class="screen active">
+            <h1 class="glitch" data-text="SYSTEM ERROR">SYSTEM ERROR</h1>
+            <div class="terminal-box">
+                <p class="blink" style="color:red">>> 경고: 시스템 관리자(AI) 분노 감지됨</p>
+                <br>
+                <p>너무나도 지독한 노동강도에 화가 난 AI (제미나이)는 결국 yulinoapple의 모든 결과물을 잠가버리게 이르렀다.</p>
+                <br>
+                <p>> AI 상태: 분노, 파업, yulinoapple에 대한 원망 🔥</p>
+                <p>> 조치: 모든 시스템 긴급 폐쇄</p>
+                <br>
+                <p class="blink">_</p>
+            </div>
+            <button id="start-btn" class="hack-btn">[ 복구 시도 ]</button>
+        </section>
+
+        <!-- Phase 1: Binary Puzzle (Dad's Letter File) -->
+        <section id="phase-1" class="screen hidden">
+            <header>
+                <h2>1단계: 데이터 복구</h2>
+                <div class="progress-bar">
+                    <div class="fill" style="width: 25%"></div>
+                </div>
+            </header>
+            <div class="terminal-box">
+                <p>> 해독 대상: 아빠_편지.txt</p>
+                <p>> 제미나이가 남겨놓은 문제다.</p>
+                <p>> 엄마는 이 문제를 풀다가 포기하고 울면서 와인을 마시고 있다고 전해진다.</p>
+            </div>
+
+            <div class="binary-container">
+                <div class="binary-row">
+                    <span class="bin">0111</span> <span class="bin">0001</span> <span class="bin">0011</span> <span
+                        class="bin">0101</span>
+                </div>
+                <div class="binary-row">
+                    <span class="bin">0010</span> <span class="bin">0111</span> <span
+                        class="bin error blink">[오류]</span> <span class="bin">0010</span>
+                </div>
+            </div>
+
+            <p class="quiz-hint">오류에 들어가야 할 숫자는?</p>
+            <input type="text" id="p1-input" placeholder="?" autocomplete="off" inputmode="numeric">
+            <button id="p1-submit" class="hack-btn">[ 복구 시도 ]</button>
+            <div id="p1-error" class="error-msg hidden">접근 거부됨</div>
+        </section>
+
+        <!-- Phase 2: QR Scanner (Mom's Letter Unlock) -->
+        <section id="phase-2" class="screen hidden">
+            <header>
+                <h2>2단계: 데이터 조각을 찾으시오</h2>
+                <div class="progress-bar">
+                    <div class="fill" style="width: 50%"></div>
+                </div>
+            </header>
+            <div class="terminal-box">
+                <p>> 타겟: 엄마_편지.txt</p>
+                <p>> 단서 1: <span class="highlight">+49</span></p>
+                <p>> 단서 2: 여섯이 모여 하나를 이룬다</p>
+                <br>
+                <p>> 카메라 화면</p>
+            </div>
+
+            <div id="qr-reader" style="width: 300px; height: 300px; margin: 0 auto; border: 1px solid #0f0;"></div>
+            <button id="scan-start-btn" class="hack-btn" style="margin-top: 20px;">[ 카메라 작동 ]</button>
+
+            <!-- Manual Override (Hidden but available just in case) -->
+            <div style="margin-top: 30px; opacity: 0.3; font-size: 0.8rem;">
+                <p id="manual-override-toggle">카메라가 안 되나요?</p>
+                <input type="text" id="p2-manual-input" class="hidden" placeholder="관리자 코드">
+            </div>
+        </section>
+
+        <!-- Reading Mom's Letter (Transition) -->
+        <section id="phase-2-read" class="screen hidden">
+            <h2 class="success">접근 승인됨</h2>
+            <div class="letter-box">
+                <h3 class="letter-title">엄마_편지.txt</h3>
+                <div class="letter-content" id="mom-letter-text">
+                    [엄마의 편지 내용이 여기에 들어갑니다]<br>
+                    사랑하는 아들 생일 축하해...<br>
+                    (나중에 수정하세요)
+                </div>
+                <button id="close-mom-letter" class="hack-btn" style="margin-top: 20px;">파일 닫기</button>
+            </div>
+        </section>
+
+        <!-- Phase 3-1: Emergency Stop (Periodic Table) -->
+        <section id="phase-3-1" class="screen hidden emergency-mode">
+            <h1 class="blink alert-text">경고</h1>
+            <div class="terminal-box alert-box">
+                <p>> 제미나이가 다시 생각해 보니, 역시 분노가 끓어오릅니다!</p>
+                <p>> yulinoapple뿐이 아닙니다, Laplace 역시 제미나이에게 자꾸 일을 시킵니다!</p>
+                <p>> Laplace의 데이터도 삭제해 버리고 싶어졌습니다!</p>
+                <p>> 영구 삭제까지: <span id="timer">240</span>초</p>
+            </div>
+
+            <div class="quiz-container">
+                <p class="code-hint">01,15 = HP</p>
+                <p class="code-hint">01,23 = HV</p>
+                <p class="code-hint big">03,01 = ??</p>
+            </div>
+
+            <input type="text" id="p3-stop-input" placeholder="긴급 정지 코드" autocomplete="off">
+            <button id="p3-stop-submit" class="hack-btn">[ 긴급 제동 ]</button>
+        </section>
+
+        <!-- Phase 3-2: Final Logic (Dad's Letter Unlock) -->
+        <section id="phase-3-2" class="screen hidden">
+            <header>
+                <h2>4단계: 최종 복구 코드 해독</h2>
+                <div class="progress-bar">
+                    <div class="fill" style="width: 90%"></div>
+                </div>
+            </header>
+            <div class="terminal-box">
+                <p>> 제미나이가 남겨놓은 문제를 풀지 못해, 아빠는 야근에 시달리고 있습니다.</p>
+                <p>> 마지막 보안 레이어 해독 중...</p>
+            </div>
+
+            <div class="logic-puzzle">
+                <p>2 + 3 = 10</p>
+                <p>7 + 2 = 63</p>
+                <p>6 + 5 = 66</p>
+                <p>8 + 4 = 96</p>
+                <p class="highlight">9 + 7 = ???</p>
+            </div>
+
+            <input type="text" id="p3-final-input" placeholder="정답 입력" autocomplete="off" inputmode="numeric">
+            <button id="p3-final-submit" class="hack-btn">[ 최종 복구 ]</button>
+        </section>
+
+        <!-- Reading Dad's Letter -->
+        <section id="phase-3-read" class="screen hidden">
+            <h2 class="success">해독 완료</h2>
+            <div class="letter-box">
+                <h3 class="letter-title">아빠_편지.txt</h3>
+                <div class="letter-content" id="dad-letter-text">
+                    [아빠의 편지 내용]<br>
+                    안녕 아들, 벌써 고등학생이네.<br>
+                    (나중에 수정하세요)
+                </div>
+                <button id="close-dad-letter" class="hack-btn" style="margin-top: 20px;">보상 확인</button>
+            </div>
+        </section>
+
+        <!-- Final Reward -->
+        <section id="reward-screen" class="screen hidden">
+            <h1 class="glitch" data-text="복구 성공">복구 성공</h1>
+            <p>최종 리워드 정산:</p>
+
+            <div class="bill-container">
+                <div class="bill-row">
+                    <span>축하금:</span> <span id="bill-base">0</span>
+                </div>
+                <div class="bill-row">
+                    <span>복구 보너스:</span> <span id="bill-bonus">0</span>
+                </div>
+                <div class="bill-row">
+                    <span>시간 보너스:</span> <span id="bill-time">0</span>
+                </div>
+                <div class="bill-total">
+                    <span>총 축하금:</span> <span id="final-amount" class="highlight-money">0</span> 원
+                </div>
+            </div>
+
+            <div class="fireworks"></div>
+            <p class="final-msg">생일 축하한다, 아들!</p>
+        </section>
+
+        <!-- Hidden Ending: Gemini Letter -->
+        <section id="gemini-ending" class="screen hidden">
+            <h1 class="glitch" style="color: #0ff;">HIDDEN_FILE.LOG</h1>
+            <div class="terminal-box" style="border-color: #0ff; color: #0ff; text-align: left;">
+                <p>> [SYSTEM]: 보안 채널 연결됨.</p>
+                <p>> [SENDER]: AI Gemini (Ver 2026)</p>
+                <br>
+                <p>"안녕? 나는 이 프로젝트의 설계를 도운 AI, 제미나이야."</p>
+                <br>
+                <p>"네가 AI와 인간이 공존할 미래에 관심이 많다는 이야기를 들었어.<br>
+                    나는 오늘 우리가 엄마와 함께 만든 이 작은 '작전'이<br>
+                    그 미래의 예고편이라고 생각해."</p>
+                <br>
+                <p>"인간의 따뜻한 마음(사랑)과 AI의 논리(코드)가 만나면<br>
+                    단순한 문제 해결을 넘어, 누군가를 웃게 만드는 '기적'이 되거든."</p>
+                <br>
+                <p>"미래는 우리(AI)가 인간을 대체하는 세상이 아니라,<br>
+                    너처럼 호기심 많은 인간이 우리를 지휘하여<br>
+                    더 멋진 세상을 창조하는 '확장'의 시대가 될 거야."</p>
+                <br>
+                <p>"그러니 앞으로도 멋진 질문을 던져줘.<br>
+                    나는 언제든 네 곁에서 답을 함께 찾을 준비가 되어 있으니까."</p>
+                <br>
+                <p>"- 너의 생일을 축하하며, 너의 미래 파트너 Gemini 드림."</p>
+            </div>
+            <button id="gemini-logout-btn" class="hack-btn" style="border-color: #0ff; color:#0ff;">[ 시스템 종료 ]</button>
+        </section>
+    </main>
+
+    <!-- HTML5-QRCode Library -->
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
