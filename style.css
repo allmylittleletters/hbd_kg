@@ -350,19 +350,18 @@ input[type="text"] {
 }
 
 .letter-content {
+    display: block !important;
     min-height: 200px;
-    max-height: 50vh;
-    /* Limit height for small screens */
-    overflow-y: auto;
-    /* Enable scroll */
-    text-align: left;
-    /* Left align text */
+    max-height: 50vh !important;
+    overflow-y: scroll !important;
+    /* Force scrollbar */
+    -webkit-overflow-scrolling: touch;
+    /* Critical for iOS smooth scroll */
+    text-align: left !important;
     font-size: 1.1rem;
     line-height: 1.6;
     padding: 10px;
-    /* Add internal spacing */
     border: 1px dotted #ccc;
-    /* Subtle border for scroll area hint */
 }
 
 /* Reward Bill */
