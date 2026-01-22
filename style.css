@@ -18,7 +18,11 @@ body {
     font-family: var(--font-stack);
     font-size: 18px;
     height: 100vh;
+    height: 100dvh;
+    /* Mobile viewport fix */
+    min-height: 100%;
     overflow: hidden;
+    /* Prevent scroll on intro */
     text-shadow: 0 0 5px var(--main-color);
 }
 
@@ -51,7 +55,8 @@ body {
     padding: 20px;
     padding-top: 80px;
     /* Compensation for Fixed HUD */
-    height: 100%;
+    min-height: 100%;
+    /* Allow expansion */
     display: flex;
     flex-direction: column;
     justify-content: center;
