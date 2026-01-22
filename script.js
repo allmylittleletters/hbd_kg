@@ -132,16 +132,7 @@ document.getElementById('manual-override-toggle').addEventListener('click', () =
     }
 });
 
-// --- DEBUG: Click QR Box to Pass (Temporary) ---
-document.getElementById('qr-reader').addEventListener('click', () => {
-    if (confirm("테스트 모드: QR 단계를 강제로 통과하시겠습니까?")) {
-        // Try to clear if running but don't block
-        if (html5QrcodeScanner) {
-            html5QrcodeScanner.clear().catch(err => { });
-        }
-        triggerPhase2Success();
-    }
-});
+
 
 document.getElementById('close-mom-letter').addEventListener('click', () => {
     updateHUD(3);
